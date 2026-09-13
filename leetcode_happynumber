@@ -1,0 +1,24 @@
+/*A happy number is a number defined by the following process:
+
+Starting with any positive integer, replace the number by the sum of the squares of its digits.
+Repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1.
+Those numbers for which this process ends in 1 are happy. */
+
+class Solution {
+public:
+    bool isHappy(int n) {
+          unordered_set<int> sn;
+        while (n != 1) {
+            if (sn.count(n)) return false;
+            sn.insert(n);
+            int res = 0;
+            while (n > 0) {
+                int rem = n % 10;
+                res += rem * rem;
+                n /= 10;
+            }
+            n = res;
+        }
+        return true;
+    }
+};
