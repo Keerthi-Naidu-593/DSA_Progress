@@ -1,0 +1,38 @@
+/*Given a 32-bit integer num, return a string representing its hexadecimal representation. For negative integers, two’s complement method is used.
+
+All the letters in the answer string should be lowercase characters, and there should not be any leading zeros in the answer except for the zero itself.
+
+Note: You are not allowed to use any built-in library method to directly solve this problem.*/
+
+class Solution {
+public:
+    string toHex(int num) {
+        vector<int>v;
+        long long k=num;
+        if(num<0){
+            k=pow(2,32)+k;
+        }
+        else if(k==0)return "0";
+        while(k>=16){
+            int r=k%16;
+            v.push_back(r);
+            k/=16;
+        }
+        v.push_back(k);
+        reverse(v.begin(),v.end());
+        string ans="";
+        for(int x:v){
+            cout<<x<<" ";
+            if(x<=9)ans=ans+to_string(x);
+            else if(x==10)ans+="a";
+            else if(x==11)ans+="b";
+            else if(x==12)ans+="c";
+            else if(x==13)ans+="d";
+            else if(x==14)ans+="e";
+            else ans+="f";
+            
+        }
+        return ans;
+
+    }
+};
