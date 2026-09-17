@@ -1,0 +1,18 @@
+Given an integer x, return true if x is a palindrome, and false otherwise.
+class Solution {
+public:
+    bool isPalindrome(int x) {
+       if (x<0) return false ;
+       long long t=x;
+       long long num=0;
+       while(t){
+        int rem=t%10;
+        if(rem==0)num=num*10;
+        else
+        num=num*10+rem;
+        t=t/10;
+       }
+       if(num==x)return true;
+       return false;
+    }
+};
