@@ -1,0 +1,19 @@
+Find Numbers with Even Number of Digits
+Given an array nums of integers, return how many of them contain an even number of digits.
+
+
+class Solution {
+public:
+    int findNumbers(vector<int>& nums) {
+        int ans=0;
+       for (int x:nums){
+        int c=0;
+            while(x){
+                c++;
+                x/=10;
+            }
+            if(c%2==0)ans++;
+       } 
+       return ans;
+    }
+};
