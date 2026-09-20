@@ -1,0 +1,68 @@
+645. Set Mismatch
+ou have a set of integers s, which originally contains all the numbers from 1 to n. Unfortunately, due to some error, one of the numbers in s got duplicated to another number in the set, which results in repetition of one number and loss of another number.
+
+You are given an integer array nums representing the data status of this set after the error.
+
+Find the number that occurs twice and the number that is missing and return them in the form of an array.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,2,4]
+Output: [2,3]
+Example 2:
+
+Input: nums = [1,1]
+Output: [1,2]
+
+lass Solution {
+public:
+    vector<int> findErrorNums(vector<int>& nums) {
+        vector<int>v;
+        vector<int>a(nums.size());
+        for(int x:nums){
+            a[x-1]++;
+        }
+        int y=nums[0];
+        for(int i=0;i<a.size();i++){
+            if(a[i]==2)v.push_back(i+1);
+            if(a[i]==0)y=i+1;
+        }
+        v.push_back(y);
+        return v;
+    }
+};
+
+442. Find All Duplicates in an Array
+Given an integer array nums of length n where all the integers of nums are in the range [1, n] and each integer appears at most twice, return an array of all the integers that appears twice.
+
+You must write an algorithm that runs in O(n) time and uses only constant auxiliary space, excluding the space needed to store the output
+
+ 
+
+Example 1:
+
+Input: nums = [4,3,2,7,8,2,3,1]
+Output: [2,3]
+Example 2:
+
+Input: nums = [1,1,2]
+Output: [1]
+Example 3:
+
+Input: nums = [1]
+Output: []
+
+class Solution {
+public:
+    vector<int> findDuplicates(vector<int>& nums) {
+        vector<int>v;
+        for(int x:nums){
+             if(s[x-1]==true)v.push_back(x);
+            if(s[x-1]==false)s[x-1]=true;
+           
+        }
+        return v;
+    }
+};
