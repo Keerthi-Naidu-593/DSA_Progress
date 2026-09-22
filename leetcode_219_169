@@ -1,0 +1,47 @@
+219. Contains Duplicate II
+Given an integer array nums and an integer k, return true if there are two distinct indices i and j in the array such that nums[i] == nums[j] and abs(i - j) <= k.
+Example 1:
+
+Input: nums = [1,2,3,1], k = 3
+Output: true
+
+lass Solution {
+public:
+    bool containsNearbyDuplicate(vector<int>& nums, int k) {
+        unordered_map<int,int>m;
+        for(int i=0;i<nums.size();i++){
+            if(m.count(nums[i])){
+                if(abs(i-m[nums[i]])<=k)return true;
+            }
+            m[nums[i]]=i;
+        }
+        return false;
+    }
+};
+
+169. Majority Element
+
+Given an array nums of size n, return the majority element.
+
+The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+Example 1:
+
+Input: nums = [3,2,3]
+Output: 3
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+       map<int,int>m;
+         int c=0,n=nums.size();
+         int ans=0;
+        for(int i=0;i<n;i++){
+            m[nums[i]]++;
+            if(m[nums[i]]>c){
+                c=m[nums[i]];
+                ans=nums[i];
+            }
+        }
+        return ans;
+    }
+};
