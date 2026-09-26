@@ -1,0 +1,33 @@
+724. Find Pivot Index
+
+Given an array of integers nums, calculate the pivot index of this array.
+The pivot index is the index where the sum of all the numbers strictly to the left of the index is equal to the sum of all the numbers strictly to the index's right.
+If the index is on the left edge of the array, then the left sum is 0 because there are no elements to the left. This also applies to the right edge of the array.
+Return the leftmost pivot index. If no such index exists, return -1.
+
+class Solution {
+public:
+    int pivotIndex(vector<int>& v) {
+         int n=v.size();
+         int ans=-1;
+        vector<int>s(n),p(n);
+        p[0]=0;
+        s[n-1]=0;
+        for(int i=1;i<n;i++){
+            p[i]=p[i-1]+v[i-1];
+        }
+
+        for(int i=n-2;i>=0;i--){
+            s[i]=s[i+1]+v[i+1];
+        }
+
+        for(int i=0;i<n;i++){
+            if(p[i]==s[i])
+            {ans=i;
+            break;
+            }
+        }
+
+        return ans;
+    }
+};
