@@ -1,0 +1,32 @@
+561. Array Partition
+Given an integer array nums of 2n integers, group these integers into n pairs (a1, b1), (a2, b2), ..., (an, bn) such that the sum of min(ai, bi) for all i is maximized. Return the maximized sum.
+
+ class Solution {
+public:
+    int arrayPairSum(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        long long sum=0;
+        for(int i=0;i<nums.size();i+=2){
+            sum+=nums[i];
+        }
+        return sum;
+    }
+};
+
+769. Max Chunks To Make Sorted
+You are given an integer array arr of length n that represents a permutation of the integers in the range [0, n - 1].
+We split arr into some number of chunks (i.e., partitions), and individually sort each chunk. After concatenating them, the result should equal the sorted array.
+Return the largest number of chunks we can make to sort the array.
+
+class Solution {
+public:
+    int maxChunksToSorted(vector<int>& arr) {
+        int n=arr.size();
+        int c=0,d=0;
+        for(int i=0;i<n;i++){
+            d+=arr[i]-i;
+            if(d==0)c++;
+        }
+        return c;
+    }
+};
