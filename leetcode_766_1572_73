@@ -1,0 +1,66 @@
+766. Toeplitz Matrix
+Given an m x n matrix, return true if the matrix is Toeplitz. Otherwise, return false.
+A matrix is Toeplitz if every diagonal from top-left to bottom-right has the same elements.
+class Solution {
+public:
+    bool isToeplitzMatrix(vector<vector<int>>& m) {
+       
+        for(int i=0;i<m.size();i++){
+            for(int j=0;j<m[0].size();j++){
+                if((i+1)<m.size() && (j+1)<m[0].size()){
+                    if(m[i][j]!=m[i+1][j+1]){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+};
+
+1572. Matrix Diagonal Sum
+Given a square matrix mat, return the sum of the matrix diagonals.
+Only include the sum of all the elements on the primary diagonal and all the elements on the secondary diagonal that are not part of the primary diagonal.
+
+class Solution {
+public:
+    int diagonalSum(vector<vector<int>>& m) {
+        int sum=0;
+        for(int i=0;i<m.size();i++ ){
+            for(int j=0;j<m[0].size();j++){
+                if(i==j || i+j==(m.size()-1))sum+=m[i][j];
+            }
+        }
+        return sum;
+    }
+};
+
+73. Set Matrix Zeroes
+Given an m x n integer matrix matrix, if an element is 0, set its entire row and column to 0's.
+You must do it in place.
+
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& m) {
+        set<int>s1,s2;
+        for(int i=0;i<m.size();i++){
+            for(int j=0;j<m[0].size();j++){
+                if(m[i][j]==0){
+                    s1.insert(i);
+                    s2.insert(j);
+                }
+            }
+    }
+            for(int x:s1){
+                for(int k=0;k<m[0].size();k++){
+                    m[x][k]=0;
+                }
+            }
+            for(int x:s2){
+                for(int k=0;k<m.size();k++){
+                    m[k][x]=0;
+                }
+            }
+        }
+    
+};
