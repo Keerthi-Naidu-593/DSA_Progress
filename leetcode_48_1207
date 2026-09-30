@@ -1,0 +1,41 @@
+48. Rotate Image
+You are given an n x n 2D matrix representing an image, rotate the image by 90 degrees (clockwise).
+You have to rotate the image in-place, which means you have to modify the input 2D matrix directly. DO NOT allocate another 2D matrix and do the rotation.
+class Solution {
+public:
+    void rotate(vector<vector<int>>& m) {
+        int n=m.size();
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                int t=m[i][j];
+                m[i][j]=m[j][i];
+                m[j][i]=t;
+            }
+        }
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n/2;j++){
+                int t=m[i][j];
+                m[i][j]=m[i][n-j-1];
+                m[i][n-j-1]=t;
+            }
+        }
+    }
+
+1207. Unique Number of Occurrences
+Given an array of integers arr, return true if the number of occurrences of each value in the array is unique or false otherwise.
+
+class Solution {
+public:
+    bool uniqueOccurrences(vector<int>& arr) {
+        unordered_map<int,int>m;
+        for(int x:arr){
+            m[x]++;
+        }
+        set<int>s;
+        for(auto &p:m){
+            if(s.count(p.second))return false;
+            s.insert(p.second);
+        }
+        return true;
+    }
+};
