@@ -1,0 +1,16 @@
+2544. Alternating Digit Sum
+You are given a positive integer n. Each digit of n has a sign according to the following rules:
+
+The most significant digit is assigned a positive sign.
+Each other digit has an opposite sign to its adjacent digits.
+Return the sum of all digits with their corresponding sign.
+int alternateDigitSum(int n) {
+    int sum = 0;
+    int sn = -1;
+     int digits=n;
+     while(digits){
+     sn *= -1;
+      sum += (sn*(digits%10));
+     digits/=10;}
+      return sum*sn;
+}
