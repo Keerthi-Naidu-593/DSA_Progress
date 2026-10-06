@@ -1,0 +1,52 @@
+345. Reverse Vowels of a String
+Given a string s, reverse only all the vowels in the string and return it.
+The vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in both lower and upper cases, more than once.
+
+ class Solution {
+public:
+    bool isvowel(char c){
+        c=tolower(c);
+        if(c=='a' || c=='e' || c=='i' || c=='o' || c=='u')return true;
+        return false;
+    }
+    string reverseVowels(string s) {
+        int p1=0,p2=s.size()-1;
+        
+        while(p1<p2){
+            if(isvowel(s[p1])&& isvowel(s[p2])){
+                char t=s[p1];
+                s[p1]=s[p2];
+                s[p2]=t;
+                p1++;
+                p2--;
+            }
+            else if(isvowel(s[p1])){
+                p2--;
+            }
+            else if(isvowel(s[p2])){
+                p1++;
+            }
+            else{
+                p1++;
+                p2--;
+            }
+        }
+        return s;
+    }
+};
+
+2652. Sum Multiples
+Given a positive integer n, find the sum of all integers in the range [1, n] inclusive that are divisible by 3, 5, or 7.
+Return an integer denoting the sum of all numbers in the given range satisfying the constraint.
+class Solution {
+public:
+    int sumOfMultiples(int n) {
+        long sum=0;
+        for(int i=3;i<=n;i++){
+            if(i%3==0 || i%5==0 || i%7==0){
+                sum+=i;
+            }
+        }
+        return sum;
+    }
+};
