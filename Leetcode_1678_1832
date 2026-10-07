@@ -1,0 +1,39 @@
+1678. Goal Parser Interpretation
+You own a Goal Parser that can interpret a string command. The command consists of an alphabet of "G", "()" and/or "(al)" in some order. The Goal Parser will interpret "G" as the string "G", "()" as the string "o", and "(al)" as the string "al". The interpreted strings are then concatenated in the original order.
+Given the string command, return the Goal Parser's interpretation of command.
+class Solution {
+public:
+    string interpret(string cm) {
+        string s="";
+        for(int i=0;i<cm.size();i++){
+            if(cm[i]=='G')s+='G';
+            else if(cm[i]=='('&& i!=cm.size()-1 && cm[i+1]==')')
+            {
+                s+='o';
+                i++;
+            }
+            else if(cm[i]=='(' && i!=cm.size()-1 && cm[i+1]=='a'){
+                s+="al";
+            }
+        }
+        return s;
+    }
+};
+
+1832. Check if the Sentence Is Pangram
+A pangram is a sentence where every letter of the English alphabet appears at least once.
+Given a string sentence containing only lowercase English letters, return true if sentence is a pangram, or false otherwise.
+class Solution {
+public:
+    bool checkIfPangram(string sentence) {
+        vector<int>v(26);
+        for(char c:sentence){
+            v[c-'a']++;
+        }
+        for(int i=0;i<26;i++){
+            if(v[i]==0)return false;
+        }
+        return true;
+    }
+};
+ 
