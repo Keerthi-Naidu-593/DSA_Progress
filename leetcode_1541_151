@@ -1,0 +1,69 @@
+1541. Minimum Insertions to Balance a Parentheses String
+Given a parentheses string s containing only the characters '(' and ')'. A parentheses string is balanced if:
+Any left parenthesis '(' must have a corresponding two consecutive right parenthesis '))'.
+Left parenthesis '(' must go before the corresponding two consecutive right parenthesis '))'.
+In other words, we treat '(' as an opening parenthesis and '))' as a closing parenthesis.
+For example, "())", "())(())))" and "(())())))" are balanced, ")()", "()))" and "(()))" are not balanced.
+You can insert the characters '(' and ')' at any position of the string to balance it if needed.
+Return the minimum number of insertions needed to make s balanced.
+class Solution {
+public:
+    int minInsertions(string s) {
+        stack<char>st;
+        int c=0;
+        for(int i=0;i<s.size();i++){
+            if(s[i]=='('){
+                st.push(s[i]);
+            }
+            else if(s[i]==')'&& s[i+1]==')'){
+                  if(st.empty()){
+                    c++;
+                  }
+                  else{
+                    st.pop();
+                  }
+                  i++;
+            }
+            else if(s[i]==')' && i==s.size()-1){
+                if(st.empty())c+=2;
+                else 
+                {
+                    c++;
+                    st.pop();
+                }
+            }
+            else if(s[i]==')' && s[i+1]!=')' && st.size()!=0 ){
+                c++;
+                st.pop();
+            }
+            else if(s[i]==')' && s[i+1]!=')' && st.size()==0 ){
+                c+=2;
+            }
+        }
+        if(st.size()!=0) return (2*st.size() + c);
+        return c;
+    }
+};
+
+151. Reverse Words in a String
+Given an input string s, reverse the order of the words.
+A word is defined as a sequence of non-space characters. The words in s will be separated by at least one space.
+Return a string of the words in reverse order concatenated by a single space.
+Note that s may contain leading or trailing spaces or multiple spaces between two words. The returned string should only have a single space separating the words. Do not include any extra spaces.
+class Solution {
+public:
+    string reverseWords(string s) {
+        string word;
+        stringstream ss(s);
+        vector<string>v;
+        while(ss>>word){
+             v.push_back(word);
+        }
+        string st="";
+        for(int i=v.size()-1;i>=0;i--){
+            st+=v[i];
+            if(i!=0)st=st+" ";
+        }
+        return st;
+    }
+};
