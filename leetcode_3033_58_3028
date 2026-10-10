@@ -1,0 +1,67 @@
+3033. Modify the Matrix
+Given a 0-indexed m x n integer matrix matrix, create a new 0-indexed matrix called answer. Make answer equal to matrix, then replace each element with the value -1 with the maximum element in its respective column.
+Return the matrix answer.
+ vector<vector<int>>ans(m.size(),vector<int>(m[0].size(),0));
+       int t=m[0].size();
+       vector<int>v(t);
+       for(int i=0;i<m.size();i++){
+        for(int j=0;j<m[0].size();j++){
+              v[j]=max(v[j],m[i][j]);
+        }
+       }
+       for(int i=0;i<m.size();i++){
+        for(int j=0;j<m[0].size();j++){
+            if(m[i][j]==-1)ans[i][j]=v[j];
+            else{
+                ans[i][j]=m[i][j];
+            }
+        }
+       } 
+       return ans;
+    }
+};
+
+58. Length of Last Word
+Given a string s consisting of words and spaces, return the length of the last word in the string.
+A word is a maximal substring consisting of non-space characters only.
+class Solution(object):
+    def lengthOfLastWord(self, s):
+        words=s.split()
+        n=len(words)
+        return len(words[n-1])
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        stringstream ss(s);
+        string word;
+        int c=0;
+        while(ss>>word){
+            
+        }
+        c=word.size();
+        return c;
+    }
+};
+
+3028. Ant on the Boundary
+An ant is on a boundary. It sometimes goes left and sometimes right.
+You are given an array of non-zero integers nums. The ant starts reading nums from the first element of it to its end. At each step, it moves according to the value of the current element:
+If nums[i] < 0, it moves left by -nums[i] units.
+If nums[i] > 0, it moves right by nums[i] units.
+Return the number of times the ant returns to the boundary.
+Notes:
+There is an infinite space on both sides of the boundary.
+We check whether the ant is on the boundary only after it has moved |nums[i]| units. In other words, if the ant crosses the boundary during its movement, it does not count.
+class Solution {
+public:
+    int returnToBoundaryCount(vector<int>& nums) {
+        int s=0,c=0;
+        int t=nums.size();
+        for(int i=0;i<t;i++){
+            s+=nums[i];
+            if(s==0)c++;
+        }
+        return c;
+
+    }
+};
