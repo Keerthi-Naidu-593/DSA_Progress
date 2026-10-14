@@ -1,0 +1,23 @@
+917. Reverse Only Letters
+Given a string s, reverse the string according to the following rules:
+All the characters that are not English letters remain in the same position.
+All the English letters (lowercase or uppercase) should be reversed.
+Return s after reversing it.
+class Solution {
+public:
+    string reverseOnlyLetters(string s) {
+        int p1=0,p2=s.size()-1;
+        while(p1<p2){
+            if(!isalpha(s[p1]))p1++;
+            if(!isalpha(s[p2]))p2--;
+            if(isalpha(s[p1]) && isalpha(s[p2])){
+                char c=s[p1];
+                s[p1]=s[p2];
+                s[p2]=c;
+                p2--;
+                p1++;
+            }
+        }
+        return s;
+    }
+};
