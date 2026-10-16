@@ -1,0 +1,43 @@
+28. Find the Index of the First Occurrence in a String
+Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+class Solution {
+public:
+    int strStr(string h, string n) {
+        int y=h.size();
+        int x=n.size();
+        for(int i=0;i<y;i++){
+            if(h[i]==n[0] && (i+x-1)<y){
+                if(h.substr(i,x)==n)return i;
+            }
+        }
+        return -1;
+    }
+};
+
+438. Find All Anagrams in a String
+Given two strings s and p, return an array of all the start indices of p's anagrams in s. You may return the answer in any order.
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p){
+        int n = s.size();
+        int m = p.size();
+
+        map<char,int> need;   
+        map<char,int> have;   
+        for(char c : p) need[c]++;
+        vector<int>v;
+        int l = 0;
+        for(int r = 0; r < n; r++) {
+            have[s[r]]++;
+            if(r-l+1>m) {
+                have[s[l]]--;
+                if(have[s[l]] == 0) have.erase(s[l]);
+                l++;
+            }
+            if(r-l+1 == m) {
+                if(have==need) v.push_back(l);
+            }
+        }
+        return v;
+    }
+};
