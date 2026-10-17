@@ -1,0 +1,41 @@
+541. Reverse String II
+Given a string s and an integer k, reverse the first k characters for every 2k characters counting from the start of the string.
+If there are fewer than k characters left, reverse all of them. If there are less than 2k but greater than or equal to k characters, then reverse the first k characters and leave the other as original.
+class Solution {
+public:
+    string reverseStr(string s, int k) {
+        //finally... yatta!
+        int x=s.size();
+        if(x<=k){
+            reverse(s.begin(),s.end());
+            return s;
+        }
+        int t=2*k;
+        for(int i=0;i<x;i++){
+            if(i%t==0){
+                int l=i,h=min(i+k-1,x-1);
+                while(l<h){
+                    char c=s[l];
+                    s[l]=s[h];
+                    s[h]=c;  
+                    l++;
+                    h--;    
+                }    
+            }
+        }
+        return s;
+    }
+};
+
+771. Jewels and Stones
+You're given strings jewels representing the types of stones that are jewels, and stones representing the stones you have. Each character in stones is a type of stone you have. You want to know how many of the stones you have are also jewels.
+Letters are case sensitive, so "a" is considered a different type of stone from "A".
+class Solution(object):
+    def numJewelsInStones(self, jewels, stones):
+        #yahho!
+        c=0
+        for i in stones:
+            if i in jewels:
+                c+=1
+        return c
+        
