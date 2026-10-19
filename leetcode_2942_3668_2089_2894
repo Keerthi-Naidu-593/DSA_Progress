@@ -1,0 +1,73 @@
+2942. Find Words Containing Character
+You are given a 0-indexed array of strings words and a character x.
+Return an array of indices representing the words that contain the character x.
+Note that the returned array may be in any order.
+class Solution {
+public:
+    vector<int> findWordsContaining(vector<string>& words, char y) {
+        vector<int>v;
+        int i=0;
+        for(string x:words){
+            if(x.contains(y))v.push_back(i);
+            i++;
+        }
+        return v;
+    }
+};
+
+3668. Restore Finishing Order
+You are given an integer array order of length n and an integer array friends.
+order contains every integer from 1 to n exactly once, representing the IDs of the participants of a race in their finishing order.
+friends contains the IDs of your friends in the race sorted in strictly increasing order. Each ID in friends is guaranteed to appear in the order array.
+Return an array containing your friends' IDs in their finishing order.
+
+class Solution {
+public:
+    vector<int> recoverOrder(vector<int>& o, vector<int>& f) {
+       set<int>s(f.begin(),f.end());
+       vector<int>v;
+       int q=o.size();
+       for(int i=0;i<q;i++){
+         if(s.find(o[i])!=s.end())v.push_back(o[i]);
+       }
+       return v;
+    }
+};
+
+2089. Find Target Indices After Sorting Array
+You are given a 0-indexed integer array nums and a target element target.
+A target index is an index i such that nums[i] == target.
+Return a list of the target indices of nums after sorting nums in non-decreasing order. If there are no target indices, return an empty list. The returned list must be sorted in increasing order.
+class Solution {
+public:
+    vector<int> targetIndices(vector<int>& n, int t) {
+        vector<int>v;
+        int y=0,c=0;
+        for(int i=0;i<n.size();i++){
+            if(n[i]<t)y++;
+            if(n[i]==t)c++;
+        }
+        while(c--){
+            v.push_back(y);
+            y++;
+        }
+        return v;
+    }
+};
+
+2894. Divisible and Non-divisible Sums Difference
+You are given positive integers n and m.
+Define two integers as follows:
+num1: The sum of all integers in the range [1, n] (both inclusive) that are not divisible by m.
+num2: The sum of all integers in the range [1, n] (both inclusive) that are divisible by m.
+Return the integer num1 - num2.
+ class Solution {
+public:
+    int differenceOfSums(int n, int m) {
+       int c=(n*(n+1))/2;
+       for(int i=m;i<=n;i+=m){
+        c-=i+i;
+       }
+       return c;
+    }
+};
