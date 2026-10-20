@@ -1,0 +1,97 @@
+1684. Count the Number of Consistent Strings
+You are given a string allowed consisting of distinct characters and an array of strings words. A string is consistent if all characters in the string appear in the string allowed.
+Return the number of consistent strings in the array words.
+class Solution {
+public:
+    int countConsistentStrings(string allowed, vector<string>& words) {
+        int c=0;
+        for(string x:words){
+            int f=1;
+            for(int i=0;i<x.size();i++){     
+                if(!allowed.contains(x[i])){
+                    f=0;
+                    break;
+                }
+            }
+            if(f)c++;
+        }
+        return c;
+    }
+};
+
+2160. Minimum Sum of Four Digit Number After Splitting Digits
+You are given a positive integer num consisting of exactly four digits. Split num into two new integers new1 and new2 by using the digits found in num. Leading zeros are allowed in new1 and new2, and all the digits found in num must be used.
+For example, given num = 2932, you have the following digits: two 2's, one 9 and one 3. Some of the possible pairs [new1, new2] are [22, 93], [23, 92], [223, 9] and [2, 329].
+Return the minimum possible sum of new1 and new2.
+class Solution {
+public:
+    int minimumSum(int num) {
+        vector<int>v;
+         while(num>0){
+            v.push_back(num%10);
+            num/=10;
+        }
+        sort(v.begin(),v.end());
+        int i=0,n1=0,n=0;
+        for(int x:v){
+            if(i==0){
+                n=n*10+x;
+                i=1;
+            }
+            else{
+                n1=n1*10+x;
+                i=0;
+            }
+        }
+        return n+n1;
+
+    }
+};
+
+1688. Count of Matches in Tournament
+You are given an integer n, the number of teams in a tournament that has strange rules:
+If the current number of teams is even, each team gets paired with another team. A total of n / 2 matches are played, and n / 2 teams advance to the next round.
+If the current number of teams is odd, one team randomly advances in the tournament, and the rest gets paired. A total of (n - 1) / 2 matches are played, and (n - 1) / 2 + 1 teams advance to the next round.
+Return the number of matches played in the tournament until a winner is decided.
+class Solution {
+public:
+    int numberOfMatches(int n) {
+        int p=0;
+        while(n>1){
+            if(n%2==0){
+                p=p+n/2;
+                n=n/2;
+            }
+            else{
+                p=p+((n-1)/2);
+                n=((n-1)/2)+1;
+            }
+        }
+        return p;
+        
+    }
+};
+
+3731. Find Missing Elements
+You are given an integer array nums consisting of unique integers.
+Originally, nums contained every integer within a certain range. However, some integers might have gone missing from the array.
+The smallest and largest integers of the original range are still present in nums.
+Return a sorted list of all the missing integers in this range. If no integers are missing, return an empty list.
+class Solution {
+public:
+    vector<int> findMissingElements(vector<int>& nums) {
+        vector<int>v;
+        int mini=INT_MAX,maxi=INT_MIN;
+        for(int x:nums){
+            mini=min(mini,x);
+            maxi=max(maxi,x);
+        }
+        map<int,int>m;
+        for(int x:nums)m[x]++;
+        for(int i=mini;i<=maxi;i++){
+            if(m.find(i)==m.end())v.push_back(i);
+        }
+        return v;
+
+    }
+};
