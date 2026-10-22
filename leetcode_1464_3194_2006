@@ -1,0 +1,54 @@
+1464. Maximum Product of Two Elements in an Array
+You are given an array of integers nums.
+Choose two different indices i and j of that array.
+Return the maximum value of (nums[i] - 1) * (nums[j] - 1).
+class Solution {
+public:
+    int maxProduct(vector<int>& n) {
+        int t=n.size();
+        if(t==2)return (n[0]-1)*(n[1]-1);
+        sort(n.begin(),n.end());
+        return (n[t-1]-1)*(n[t-2]-1); 
+    }
+};
+
+3194. Minimum Average of Smallest and Largest Elements
+You have an array of floating point numbers averages which is initially empty. You are given an array nums of n integers where n is even.
+You repeat the following procedure n / 2 times:
+Remove the smallest element, minElement, and the largest element maxElement, from nums.
+Add (minElement + maxElement) / 2 to averages.
+Return the minimum element in averages.
+class Solution {
+public:
+    double minimumAverage(vector<int>& n) {
+        int t=n.size()/2;
+        double ans=200.0;
+        sort(n.begin(),n.end());
+        while(t--){
+            double x=n.front()+n.back();
+             n.erase(n.begin());
+             n.pop_back();
+             x=double(x)/2;
+            ans=min(ans,x);
+        }
+        return ans;
+    }
+};
+
+2006. Count Number of Pairs With Absolute Difference K
+Given an integer array nums and an integer k, return the number of pairs (i, j) where i < j such that |nums[i] - nums[j]| == k.
+The value of |x| is defined as:
+x if x >= 0.
+-x if x < 0.
+class Solution {
+public:
+    int countKDifference(vector<int>& n, int k) {
+        unordered_map<int,int>m;
+        for(int x:n)m[x]++;
+        int c=0;
+        for(int x:n){
+            if(m.find(x+k)!=m.end())c+=m[x+k];
+        }
+        return c;
+    }
+};
