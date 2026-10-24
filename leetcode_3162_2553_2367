@@ -1,0 +1,53 @@
+3162. Find the Number of Good Pairs I
+You are given 2 integer arrays nums1 and nums2 of lengths n and m respectively. You are also given a positive integer k.
+A pair (i, j) is called good if nums1[i] is divisible by nums2[j] * k (0 <= i <= n - 1, 0 <= j <= m - 1).
+Return the total number of good pairs.
+class Solution {
+public:
+    int numberOfPairs(vector<int>& n1, vector<int>& n2, int k) {
+        for(int i=0;i<n2.size();i++)n2[i]=n2[i]*k;
+        int c=0;
+       for(int i=0;i<n2.size();i++){
+        for(int j=0;j<n1.size();j++){
+            if(n1[j]%n2[i]==0)c++;
+        }
+       }
+       return c;
+    }
+};
+
+2553. Separate the Digits in an Array
+Given an array of positive integers nums, return an array answer that consists of the digits of each integer in nums after separating them in the same order they appear in nums.
+To separate the digits of an integer is to get all the digits it has in the same order.
+For example, for the integer 10921, the separation of its digits is [1,0,9,2,1].
+class Solution {
+public:
+    vector<int> separateDigits(vector<int>& nums) {
+        vector<int>v;
+        for(int x:nums){
+            string s=to_string(x);
+            for(char c:s){
+                v.push_back(c-'0');
+            }  
+        }
+        return v;
+    }
+};
+
+2367. Number of Arithmetic Triplets
+You are given a 0-indexed, strictly increasing integer array nums and a positive integer diff. A triplet (i, j, k) is an arithmetic triplet if the following conditions are met:
+i < j < k,
+nums[j] - nums[i] == diff, and
+nums[k] - nums[j] == diff.
+Return the number of unique arithmetic triplets.
+class Solution {
+public:
+    int arithmeticTriplets(vector<int>& n, int d) {
+        set<int>s(n.begin(),n.end());
+        int c=0;
+        for(int x:n){
+            if(s.count(x+d) && s.count(x+d+d))c++;
+        }
+        return c;
+    }
+};
