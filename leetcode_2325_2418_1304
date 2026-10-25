@@ -1,0 +1,80 @@
+2325. Decode the Message
+You are given the strings key and message, which represent a cipher key and a secret message, respectively. The steps to decode message are as follows:
+Use the first appearance of all 26 lowercase English letters in key as the order of the substitution table.
+Align the substitution table with the regular English alphabet.
+Each letter in message is then substituted using the table.
+Spaces ' ' are transformed to themselves.
+For example, given key = "happy boy" (actual key would have at least one instance of each letter in the alphabet), we have the partial substitution table of ('h' -> 'a', 'a' -> 'b', 'p' -> 'c', 'y' -> 'd', 'b' -> 'e', 'o' -> 'f').
+Return the decoded message.
+class Solution {
+public:
+    string decodeMessage(string key, string me) {
+        map<char,char>m;
+        int i=0;
+        set<char>s;
+         for(char c:key){
+            if('a'<=c && c<='z' && !s.count(c)){
+            m[c]=char(i+'a');
+            s.insert(c);
+            i++;
+            }
+         }
+         string st="";
+         for(char c:me){
+            if(c==' ')st+=" ";
+            else st+=m[c];
+         }
+        return st;
+    }
+};
+
+2418. Sort the People
+You are given an array of strings names, and an array heights that consists of distinct positive integers. Both arrays are of length n.
+For each index i, names[i] and heights[i] denote the name and height of the ith person.
+Return names sorted in descending order by the people's heights.
+class Solution {
+public:
+    vector<string> sortPeople(vector<string>& n, vector<int>& h) {
+        map<int,string>m;
+        for(int i=0;i<n.size();i++){
+            m[h[i]]=n[i];
+        }
+        vector<pair<int,string>>v(m.begin(),m.end());
+        vector<string>q;
+        sort(v.begin(),v.end(),[](pair<int,string>a,pair<int,string>b){
+            return a.first>b.first;
+        });
+        for(auto p:v){
+            q.push_back(p.second);
+        }
+        return q;
+
+    }
+};
+
+1304. Find N Unique Integers Sum up to Zero
+Given an integer n, return any array containing n unique integers such that they add up to 0.
+class Solution {
+public:
+    vector<int> sumZero(int n) {
+        vector<int>v(n);
+        int i=1,j=0;
+        int t=n/2;
+          while(t--){
+            v[j]=i;
+            v[n-j-1]=-i;
+            i++;
+            j++;
+          }
+        return v;
+
+    }
+};
+
+
+
+
+ 
+
+
+ 
