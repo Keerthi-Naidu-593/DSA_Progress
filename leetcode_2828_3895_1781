@@ -1,0 +1,56 @@
+2828. Check if a String Is an Acronym of Words
+Given an array of strings words and a string s, determine if s is an acronym of words.
+The string s is considered an acronym of words if it can be formed by concatenating the first character of each string in words in order. For example, "ab" can be formed from ["apple", "banana"], but it can't be formed from ["bear", "aardvark"].
+Return true if s is an acronym of words, and false otherwise.
+class Solution {
+public:
+    bool isAcronym(vector<string>& words, string s) {
+        string g="";
+        for(string x:words)g=g+x[0];
+        return (g==s);
+    }
+};
+
+3895. Count Digit Appearances
+You are given an integer array nums and an integer digit.
+Return the total number of times digit appears in the decimal representation of all elements in nums.
+class Solution {
+public:
+    int countDigitOccurrences(vector<int>& nums, int digit) {
+        int t=0;
+        char c=digit+'0';
+        for(int x:nums){
+            string s=to_string(x);
+            t=t+count(s.begin(),s.end(),c);
+        }
+        return t;
+        
+    }
+};
+
+1781. Sum of Beauty of All Substrings
+The beauty of a string is the difference in frequencies between the most frequent and least frequent characters.
+For example, the beauty of "abaacc" is 3 - 1 = 2.
+Given a string s, return the sum of beauty of all of its substrings.
+class Solution {
+public:
+    int beautySum(string s) {
+        int a=0, n=s.size();
+        for (int i = 0; i < n; i++) {
+            vector<int> v(26, 0);
+            int maxi = 0;
+            for (int j = i; j < n; j++) {
+                int mini = INT_MAX;
+                v[s[j]-'a']++;
+                maxi = max(maxi,v[s[j]-'a']);
+                for (int k = 0; k < 26; k++) if (v[k]) mini = min(mini,v[k]);
+                a+= maxi-mini;
+            }
+        }
+        return a;
+    }
+};
+
+
+
+
