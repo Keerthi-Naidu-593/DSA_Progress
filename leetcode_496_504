@@ -1,0 +1,50 @@
+496. Next Greater Element I
+The next greater element of some element x in an array is the first greater element that is to the right of x in the same array.
+You are given two distinct 0-indexed integer arrays nums1 and nums2, where nums1 is a subset of nums2.
+For each 0 <= i < nums1.length, find the index j such that nums1[i] == nums2[j] and determine the next greater element of nums2[j] in nums2. If there is no next greater element, then the answer for this query is -1.
+Return an array ans of length nums1.length such that ans[i] is the next greater element as described above.
+class Solution {
+public:
+    vector<int> nextGreaterElement(vector<int>& n1, vector<int>& n2) {
+        map<int,int>m;
+        int i=0;
+        for(int x:n2)m[x]=i++;
+        vector<int>v(n1.size(),-1);
+        int j=0;
+        for(int x:n1){
+            if(m.find(x)!=m.end()){
+                for(int i=m[x]+1;i<n2.size();i++){
+                    if(n2[i]>x){
+                        v[j]=n2[i];
+                        break;
+                    }
+                            
+                }
+            }
+            j++;
+        }
+        return v;
+    }
+};
+
+504. Base 7
+Given an integer num, return a string of its base 7 representation.
+class Solution {
+public:
+    string convertToBase7(int num) {
+       string s="";
+        int n=num,f=1;
+         if (num<0){
+            n=n*-1;
+            f=-1;
+         }
+        while(n>=7){
+        int r=n%7;
+        s=char(r+'0')+s;
+        n/=7;
+       } 
+       s=char(n+'0')+s;
+       if(f==-1)s="-"+s;
+       return s;
+    }
+};
