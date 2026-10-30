@@ -1,0 +1,88 @@
+605. Can Place Flowers
+You have a long flowerbed in which some of the plots are planted, and some are not. However, flowers cannot be planted in adjacent plots.
+Given an integer array flowerbed containing 0's and 1's, where 0 means empty and 1 means not empty, and an integer n, return true if n new flowers can be planted in the flowerbed without violating the no-adjacent-flowers rule and false otherwise.
+class Solution {
+public:
+    bool canPlaceFlowers(vector<int>& f, int n) {
+        int c = 0, x = 0;
+        for (int i = 0; i < f.size(); i++) {
+            if (f[i] == 1)
+                x = 1;
+            else if (f[i] == 0 && x == 1)
+                x = 0;
+            else if (f[i] == 0 && x != 1) {
+                if (i != f.size() - 1 && f[i + 1] != 0) {
+
+                } else {
+                    c++;
+                    x = 1;
+                }
+            }
+        }
+        if (c >= n)
+            return 1;
+        return 0;
+    }
+};
+
+575. Distribute Candies
+Alice has n candies, where the ith candy is of type candyType[i]. Alice noticed that she started to gain weight, so she visited a doctor.
+The doctor advised Alice to only eat n / 2 of the candies she has (n is always even). Alice likes her candies very much, and she wants to eat the maximum number of different types of candies while still following the doctor's advice.
+Given the integer array candyType of length n, return the maximum number of different types of candies she can eat if she only eats n / 2 of them.
+class Solution {
+public:
+    int distributeCandies(vector<int>& c) {
+       unordered_set<int>s(c.begin(),c.end());
+       int t=s.size();
+       int v=c.size();
+       int ans=min(v/2,t);
+       return ans;
+    }
+};
+
+492. Construct the Rectangle
+A web developer needs to know how to design a web page's size. So, given a specific rectangular web page’s area, your job by now is to design a rectangular web page, whose length L and width W satisfy the following requirements:
+The area of the rectangular web page you designed must equal to the given target area.
+The width W should not be larger than the length L, which means L >= W.
+The difference between length L and width W should be as small as possible.
+Return an array [L, W] where L and W are the length and width of the web page you designed in sequence.
+class Solution {
+public:
+    vector<int> constructRectangle(int a) {
+       if(a==1)return {1,1};
+       vector<int>q(2);
+       int mini=a,l,w;
+        for(int i=1;i*i<=a;i++){
+            if(a%i==0){
+                 if(abs(i-a/i)<mini){
+                    l=a/i;
+                    w=i;
+                    mini=abs(i-a/i);
+                 }
+            }
+        }
+        q[0]=l;
+        q[1]=w;
+        return q;
+    }
+};
+
+434. Number of Segments in a String
+Given a string s, return the number of segments in the string.
+A segment is defined to be a contiguous sequence of non-space characters.
+class Solution {
+public:
+    int countSegments(string s) {
+        if(s.size()==0)return s.size();
+        int c=0;
+        int i;
+        for(i=1;i<s.size();i++){
+            if(s[i]==' '&& s[i-1]!=' ')c++;
+        }
+        if(s[i-1]!=' ')c++;
+        return c;
+    }
+};
+
+ 
+ 
