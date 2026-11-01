@@ -1,0 +1,58 @@
+278. First Bad Version
+You are a product manager and currently leading a team to develop a new product. Unfortunately, the latest version of your product fails the quality check. Since each version is developed based on the previous version, all the versions after a bad version are also bad.
+Suppose you have n versions [1, 2, ..., n] and you want to find out the first bad one, which causes all the following ones to be bad.
+You are given an API bool isBadVersion(version) which returns whether version is bad. Implement a function to find the first bad version. You should minimize the number of calls to the API.
+public:
+    int firstBadVersion(int n) {
+        long long i=1,j=n,k;
+        while(i<=j){
+            long long m=(i+j)/2;
+            if(isBadVersion(m)){
+                k=m;
+                j=m-1;
+            }
+            else{
+               i=m+1;
+            }
+        }
+        return k;
+    }
+};
+
+34. Find First and Last Position of Element in Sorted Array
+Given an array of integers nums sorted in non-decreasing order, find the starting and ending position of a given target value.
+If target is not found in the array, return [-1, -1].
+You must write an algorithm with O(log n) runtime complexity.
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& n, int t) {
+        vector<int>v(2,-1);
+        int f=-1,l=-1;
+        int p=0,q=n.size()-1;
+        while(p<=q){
+            int m=(p+q)/2;
+            if(n[m]>=t){
+                if(n[m]==t)f=m;
+                q=m-1;
+            }
+            else{
+                p=m+1;
+            }
+        }
+        p=0,q=n.size()-1;
+        while(p<=q){
+            int m=(p+q)/2;
+            if(n[m]<=t){
+                if(n[m]==t)l=m;
+                p=m+1;
+            }
+            else{
+                q=m-1;
+            }
+        }
+        v[0]=f;
+        v[1]=l;
+        return v;
+    }
+};
+
