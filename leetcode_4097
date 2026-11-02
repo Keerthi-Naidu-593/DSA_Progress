@@ -1,0 +1,17 @@
+4097. Minimum Value of Merged Integers
+You are given an integer array nums of even length n.
+You have to merge the elements of nums in pairs by merging nums[0] with nums[1], nums[2] with nums[3], and so on, until nums[n - 2] with nums[n - 1].
+Return the minimum value among all the resulting merged integers.
+To merge two integers, concatenate all the decimal digits of the first integer followed by all the decimal digits of the second integer.
+class Solution {
+public:
+    int minMergedInteger(vector<int>& nums) {
+        int ans = INT_MAX;
+        for (int i = 0; i < nums.size(); i+=2) {
+            string x = to_string(nums[i]) + to_string(nums[i+1]);
+            int t = stoi(x);
+            ans = min(ans,t);
+        }
+        return ans;
+    }
+};
