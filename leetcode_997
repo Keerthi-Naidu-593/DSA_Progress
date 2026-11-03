@@ -1,0 +1,29 @@
+997. Find the Town Judge
+In a town, there are n people labeled from 1 to n. There is a rumor that one of these people is secretly the town judge.
+If the town judge exists, then:
+The town judge trusts nobody.
+Everybody (except for the town judge) trusts the town judge.
+There is exactly one person that satisfies properties 1 and 2.
+You are given an array trust where trust[i] = [ai, bi] representing that the person labeled ai trusts the person labeled bi. If a trust relationship does not exist in trust array, then such a trust relationship does not exist.
+Return the label of the town judge if the town judge exists and can be identified, or return -1 otherwise.
+class Solution {
+public:
+    int findJudge(int n, vector<vector<int>>& t) {
+        map<int,int>m;
+        set<int>s;
+        for(const vector<int> &x:t){
+            s.insert(x[0]);
+            m[x[1]]++;
+        }
+        if(t.size()==0)
+        {
+            if(n==1)
+            return 1;
+            else return -1;
+        }
+        for(auto p:m){
+            if(p.second==(n-1) && s.find(p.first) == s.end())return p.first;
+        }
+        return -1;
+    }
+};
