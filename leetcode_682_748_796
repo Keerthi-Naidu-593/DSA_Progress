@@ -1,0 +1,105 @@
+682. Baseball Game
+You are keeping the scores for a baseball game with strange rules. At the beginning of the game, you start with an empty record.
+You are given a list of strings operations, where operations[i] is the ith operation you must apply to the record and is one of the following:
+An integer x.
+Record a new score of x.
+'+'.
+Record a new score that is the sum of the previous two scores.
+'D'.
+Record a new score that is the double of the previous score.
+'C'.
+Invalidate the previous score, removing it from the record.
+Return the sum of all the scores on the record after applying all the operations.
+The test cases are generated such that the answer and all intermediate calculations fit in a 32-bit integer and that all operations are valid.
+class Solution {
+public:
+    int calPoints(vector<string>& op) {
+        stack<int>s;
+        for(string x:op){
+            if(x=="+"){
+                int y=s.top();
+                int a=s.top();
+                s.pop();
+                y=y+s.top();
+                s.push(a);
+                s.push(y);
+            }
+            else if(x=="C"){
+                s.pop();
+            }
+            else if(x=="D"){
+                s.push(2*s.top());
+            }
+            else{
+                s.push(stoi(x));
+            }
+        }
+        long long sum=0;
+        while(!s.empty()){
+            sum+=s.top();
+            s.pop();
+        }
+        return sum;
+        
+    }
+};
+
+748. Shortest Completing Word
+Given a string licensePlate and an array of strings words, find the shortest completing word in words.
+A completing word is a word that contains all the letters in licensePlate. Ignore numbers and spaces in licensePlate, and treat letters as case insensitive. If a letter appears more than once in licensePlate, then it must appear in the word the same number of times or more.
+For example, if licensePlate = "aBc 12c", then it contains letters 'a', 'b' (ignoring case), and 'c' twice. Possible completing words are "abccdef", "caaacab", and "cbca".
+Return the shortest completing word in words. It is guaranteed an answer exists. If there are multiple shortest completing words, return the first one that occurs in words.
+class Solution {
+public:
+    string shortestCompletingWord(string l, vector<string>& w) {
+        string s = "";
+        int le = INT_MAX;
+        vector<char> v;
+        for (int i = 0; i < l.size(); i++) {
+            if (isalpha(l[i]))
+                v.push_back(tolower(l[i]));
+        }
+        map<int, int> m;
+        for (char c : v)
+            m[c - 'a']++;
+        for (int i = 0; i < w.size(); i++) {
+            map<int, int> y;
+            for (char x : w[i]) {
+                if (m.find(x - 'a') != m.end()) {
+                    y[x - 'a']++;
+                    y[x - 'a'] = min(y[x - 'a'], m[x - 'a']);
+                }
+            }
+            if (m == y) {
+                if (w[i].size() < le) {
+                    le = w[i].size();
+                    s = w[i];
+                }
+            }
+        }
+        return s;
+    }
+};
+
+796. Rotate String
+Given two strings s and goal, return true if and only if s can become goal after some number of shifts on s.
+A shift on s consists of moving the leftmost character of s to the rightmost position.
+For example, if s = "abcde", then it will be "bcdea" after one shift.
+class Solution {
+public:
+    bool rotateString(string s, string g) {
+        if (s.size() != g.size()) {
+            return false;
+        }
+        s = s + s;
+        if (s.find(g) != string::npos)
+            return 1;
+        return 0;
+    }
+};
+
+
+
+
+ 
+
