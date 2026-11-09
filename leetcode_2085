@@ -1,0 +1,20 @@
+2085. Count Common Words With One Occurrence
+Given two string arrays words1 and words2, return the number of strings that appear exactly once in each of the two arrays.
+class Solution {
+public:
+    int countWords(vector<string>& w1, vector<string>& w2) {
+        int c = 0;
+        unordered_map<string, int> m1, m2;
+
+        for (auto& x : w1)
+            m1[x]++;
+        for (auto& x : w2)
+            m2[x]++;
+
+        for (auto p : m1) {
+            if (p.second == 1 && m2[p.first] == 1)
+                c++;
+        }
+        return c;
+    }
+};
