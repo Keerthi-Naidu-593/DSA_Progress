@@ -1,0 +1,20 @@
+1640. Check Array Formation Through Concatenation
+You are given an array of distinct integers arr and an array of integer arrays pieces, where the integers in pieces are distinct. Your goal is to form arr by concatenating the arrays in pieces in any order. However, you are not allowed to reorder the integers in each array pieces[i].
+Return true if it is possible to form the array arr from pieces. Otherwise, return false.
+class Solution {
+public:
+    bool canFormArray(vector<int>& a, vector<vector<int>>& ps) {
+        vector<int> s(101, -1);
+        for (int i = 0; i < ps.size(); ++i)
+            s[ps[i][0]] = i;
+        for (int i = 0; i < a.size();) {
+            int p = s[a[i]], j = 0;
+            if (p == -1)
+                return false;
+            while (j < ps[p].size())
+                if (a[i++] != ps[p][j++])
+                    return false;
+        }
+        return true;
+    }
+};
